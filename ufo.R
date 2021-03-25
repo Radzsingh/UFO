@@ -48,8 +48,8 @@ dev.off()
 # number of rows with complete data content
 sum(complete.cases(ufo_data))
 
-# number of rows with missing values
-colSums(is.na(ufo_data))
+# number of rows with all missing variables
+sum(apply(ufo_data, 1, function(x) sum(is.na(x)) == ncol(ufo_data)))
 
 # Ques 8
 # sort and subset the dataframe without logic
@@ -62,7 +62,7 @@ detach(ufo_data)
 # subset records of great britain with disk shaped spotting of ufo
 attach(sorted_ufo_data)
 ufo_gb_disk <- subset(sorted_ufo_data, country == "gb" & shape == "disk" )
-
+detach(sorted_ufo_data)
 # Ques 10
 # write dataframes in csv files
 write.csv(ufo_data, file = "modified_ufo.csv")
